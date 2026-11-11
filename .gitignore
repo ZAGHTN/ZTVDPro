@@ -1,0 +1,24 @@
+.venv/
+build/
+dist/
+__pycache__/
+*.pyc
+src/ffmpeg/
+src/deno/
+
+# Tests & Coverage
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Logs
+*.log
+logs/
+
+# IDE & OS
+.vscode/
+.DS_Store
+Thumbs.db
+
+ZTVDPro.spec
+build.ps1
