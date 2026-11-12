@@ -94,7 +94,7 @@ comme solution de repli.
 
 ## Utilisation
 
-1. Collez l'URL de la vidéo (optionnel : cliquez sur **Analyser** pour voir les infos et les qualités disponibles).
+1. Collez l'URL de la vidéo : cliquez sur **Analyser** pour voir les infos et les qualités disponibles.
 2. Choisissez la qualité et le format.
 3. Vérifiez le dossier de sortie et l'état de ffmpeg (message ✔ / ✘ sous le champ).
 4. Cliquez sur **Télécharger**. Dépliez « Étapes du téléchargement » pour le détail en direct.
