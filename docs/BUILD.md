@@ -128,6 +128,18 @@ concerne le dépôt Git, pas les releases.
 - Asset : `ZTVDPro-1.0.0-win64.zip` (272,6 Mo)
 - SHA-256 : `D7E6CD95576BEF85C47912C094AF33B8DAE5B332FED7BADA9EF8952108528CF7`
 
+## CI GitHub Actions
+
+Le workflow [`.github/workflows/ci.yml`](.github/workflows/ci.yml) exécute le lint
+et les tests sur Ubuntu et Windows avec Python 3.11 et 3.13. Il se déclenche sur
+les push et pull requests vers `master`, et peut être lancé manuellement depuis
+l'onglet **Actions**.
+
+Si l'onglet Actions affiche **« Actions has been disabled for this user »**,
+le blocage est au niveau du compte GitHub, pas du dépôt : le réglage
+**Settings → Actions → General** ne suffit pas. Il faut contacter le support
+GitHub pour faire réactiver Actions, puis relancer le workflow.
+
 ## Signature Windows (optionnel)
 
 L'exécutable n'est pas signé. Windows SmartScreen peut afficher un avertissement
