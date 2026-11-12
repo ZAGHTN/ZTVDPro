@@ -34,7 +34,8 @@ contient le dossier complet `ZTVDPro\` (application, ffmpeg, solveur EJS et Deno
 
 Ne déplacez pas l'exécutable seul : ffmpeg et les autres composants doivent rester à côté.
 Le SHA-256 de l'archive est publié dans les notes de release. La taille du zip est
-d'environ 650 Mo (ffmpeg + ffprobe ≈ 420 Mo, Deno ≈ 90 Mo).
+d'environ 275 Mo ; le dossier extrait occupe environ 663 Mo (ffmpeg + ffprobe
+≈ 416 Mo, Deno ≈ 93 Mo, Qt et application ≈ 150 Mo).
 
 > Les binaires lourds ne sont pas versionnés dans le dépôt Git : ils sont joints aux
 > releases (limite de 2 Go par asset) et non poussés dans l'historique Git

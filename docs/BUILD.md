@@ -118,9 +118,9 @@ Get-FileHash .\ZTVDPro-1.0.0-win64.zip -Algorithm SHA256
 ```
 
 Créez ensuite une release GitHub `v1.0.0`, joignez le zip et publiez le SHA-256
-dans les notes. Une archive de ~650 Mo reste sous la limite GitHub de **2 Go par
-asset** ; la limite de **100 Mo par fichier** concerne le dépôt Git, pas les
-releases.
+dans les notes. Une archive compressée d'environ 275 Mo (663 Mo extraits) reste
+sous la limite GitHub de **2 Go par asset** ; la limite de **100 Mo par fichier**
+concerne le dépôt Git, pas les releases.
 
 ## Signature Windows (optionnel)
 

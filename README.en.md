@@ -37,7 +37,8 @@ and Deno):
 
 Do not move the executable alone: ffmpeg and the other components must stay next
 to it. The archive SHA-256 is published in the release notes. The zip is about
-650 MB (ffmpeg + ffprobe ≈ 420 MB, Deno ≈ 90 MB).
+275 MB; the extracted folder is about 663 MB (ffmpeg + ffprobe ≈ 416 MB,
+Deno ≈ 93 MB, Qt and application ≈ 150 MB).
 
 > Large binaries are not committed to Git history. They are attached to releases
 > (2 GB per asset limit) instead of being pushed to the repository (100 MB per
