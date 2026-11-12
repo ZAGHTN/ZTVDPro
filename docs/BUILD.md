@@ -140,6 +140,20 @@ le blocage est au niveau du compte GitHub, pas du dépôt : le réglage
 **Settings → Actions → General** ne suffit pas. Il faut contacter le support
 GitHub pour faire réactiver Actions, puis relancer le workflow.
 
+## Captures d'écran du README
+
+```powershell
+.venv\Scripts\python.exe tools\make_screenshot.py
+```
+
+Le script régénère `docs/screenshots/main.png` (thème clair) et
+`main-dark.png` (thème sombre). Il s'appuie sur la plateforme Qt **native** avec
+une fenêtre non affichée (`WA_DontShowOnScreen`). N'utilisez pas
+`QT_QPA_PLATFORM=offscreen` sous Windows : cette plateforme ne charge aucune
+police, `QFontDatabase.families()` renvoie 0 et tous les glyphes sont rendus en
+carrés. Le script s'arrête avec un message explicite si aucune police n'est
+disponible.
+
 ## Signature Windows (optionnel)
 
 L'exécutable n'est pas signé. Windows SmartScreen peut afficher un avertissement

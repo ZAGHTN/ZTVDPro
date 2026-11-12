@@ -86,6 +86,7 @@ def _png_bytes(image: QImage) -> bytes:
     writer = QImageWriter(buffer, b"PNG")
     if not writer.write(image):
         raise RuntimeError(f"Écriture PNG impossible : {writer.errorString()}")
+    
     data = bytes(buffer.data())
     buffer.close()
     return data
