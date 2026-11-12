@@ -1,23 +1,26 @@
-"""Génère les captures d'écran du README (mode Qt offscreen).
+"""Génère les captures d'écran du README.
 
-    .venv\\Scripts\\python.exe tools\\make_screenshot.py
+    .venv\\Scripts\\python.exe tools/make_screenshot.py
+
+Le rendu utilise la plateforme Qt native avec une fenêtre non affichée
+(``WA_DontShowOnScreen``). La plateforme ``offscreen`` n'est volontairement pas
+utilisée : sous Windows elle ne charge aucune police, si bien que tous les
+glyphes (texte, emojis) sont rendus en carrés.
 
 Les captures montrent un état analysé mais aucun téléchargement réel : l'URL et
 les métadonnées sont fictives, et les chemins affichés sont neutres.
 """
 from __future__ import annotations
 
-import os
 import sys
 import tempfile
 from pathlib import Path
-
-os.environ.setdefault("QT_QPA_PLATFORM", "offscreen")
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 
 from PySide6.QtCore import QSettings, Qt
+from PySide6.QtGui import QFontDatabase
 from PySide6.QtWidgets import QApplication
 
 from app import i18n
@@ -79,6 +82,14 @@ def main() -> int:
     app.setOrganizationName("ZTVDProScreenshot")
     app.setStyle("Fusion")
 
+    families = QFontDatabase.families()
+    if not families:
+        print(
+            "Aucune police système disponible : les captures contiendraient des "
+            "carrés. Utilisez la plateforme Qt native (sans QT_QPA_PLATFORM=offscreen)."
+        )
+        return 1
+
     from app.main_window import MainWindow
 
     OUTPUT.mkdir(parents=True, exist_ok=True)
@@ -95,6 +106,7 @@ def main() -> int:
 
         window = MainWindow(settings)
         window.resize(1000, 900)
+        window.setAttribute(Qt.WidgetAttribute.WA_DontShowOnScreen, True)
         window.show()
         _prepare(window, app)
         # Ajuste la hauteur au contenu réel pour éviter une zone vide en bas.
