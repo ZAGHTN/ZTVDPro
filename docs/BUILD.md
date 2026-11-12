@@ -125,8 +125,10 @@ concerne le dépôt Git, pas les releases.
 ### Release 1.0.0
 
 - Page : <https://github.com/ZAGHTN/ZTVDPro/releases/tag/v1.0.0>
-- Asset : `ZTVDPro-1.0.0-win64.zip` (272,6 Mo)
-- SHA-256 : `D7E6CD95576BEF85C47912C094AF33B8DAE5B332FED7BADA9EF8952108528CF7`
+- Asset : `ZTVDPro-1.0.0-win64.rar` (272,6 Mo)
+- SHA-256 : 
+- ZTVDPro.exe : `d1eddb6fdea980cdd1adf32dfddde275c8560eaa664a1951535d28f14515cff0`
+- ZTVDPro-1.0.0-win64.rar : `2cf60bbac8c6c7c362127ebb63f94e00c110cc9b52d4fc1d276fbab90e7636ec`
 
 ## CI GitHub Actions
 

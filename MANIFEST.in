@@ -1,0 +1,6 @@
+include README.md LICENSE
+recursive-include app *.py *.qm
+recursive-include assets *
+recursive-include src/ffmpeg *
+exclude __pycache__
+exclude .venv
