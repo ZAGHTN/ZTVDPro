@@ -122,6 +122,12 @@ dans les notes. Une archive compressée d'environ 275 Mo (663 Mo extraits) reste
 sous la limite GitHub de **2 Go par asset** ; la limite de **100 Mo par fichier**
 concerne le dépôt Git, pas les releases.
 
+### Release 1.0.0
+
+- Page : <https://github.com/ZAGHTN/ZTVDPro/releases/tag/v1.0.0>
+- Asset : `ZTVDPro-1.0.0-win64.zip` (272,6 Mo)
+- SHA-256 : `D7E6CD95576BEF85C47912C094AF33B8DAE5B332FED7BADA9EF8952108528CF7`
+
 ## Signature Windows (optionnel)
 
 L'exécutable n'est pas signé. Windows SmartScreen peut afficher un avertissement
