@@ -19,6 +19,7 @@ from PySide6.QtGui import (
     QColor,
     QGuiApplication,
     QImage,
+    QImageWriter,
     QLinearGradient,
     QPainter,
     QPainterPath,
@@ -82,7 +83,9 @@ def render(size: int) -> QImage:
 def _png_bytes(image: QImage) -> bytes:
     buffer = QBuffer()
     buffer.open(QIODevice.OpenModeFlag.WriteOnly)
-    image.save(buffer, "PNG")
+    writer = QImageWriter(buffer, b"PNG")
+    if not writer.write(image):
+        raise RuntimeError(f"Écriture PNG impossible : {writer.errorString()}")
     data = bytes(buffer.data())
     buffer.close()
     return data
@@ -93,7 +96,8 @@ def main() -> int:
     ASSETS.mkdir(exist_ok=True)
 
     images = {size: render(size) for size in SIZES}
-    images[256].save(str(ASSETS / "icon.png"), "PNG")
+    if not images[256].save(str(ASSETS / "icon.png")):
+        raise RuntimeError("Écriture de assets/icon.png impossible")
 
     payloads = [(size, _png_bytes(images[size])) for size in SIZES]
     offset = 6 + 16 * len(payloads)

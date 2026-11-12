@@ -46,14 +46,18 @@ def _prepare(window, app: QApplication) -> None:
     window.progress_bar.setValue(1000)
     window.progress_bar.setFormat("100%")
     window.log_view.clear()
-    window.log_line(i18n.tr("step_analyze_start", url=DEMO_URL), "🔎 ")
-    window.log_line(f"[youtube] Extracting URL: {DEMO_URL}")
-    window.log_line("[youtube] ZTVDProDemo: Downloading webpage")
-    window.log_line("[youtube] ZTVDProDemo: Downloading player 0123abcd")
-    window.log_line("[youtube] ZTVDProDemo: Downloading initial data API JSON")
-    window.log_line("[info] ZTVDProDemo: Downloading 1 format(s): 313+251")
-    window.log_line("[info] Available subtitles: fr, en")
-    window.log_line(i18n.tr("step_analyze_done", title=DEMO_INFO["title"]), "✔ ")
+    fixed_lines = [
+        ("10:24:31", "🔎 ", i18n.tr("step_analyze_start", url=DEMO_URL)),
+        ("10:24:32", "", f"[youtube] Extracting URL: {DEMO_URL}"),
+        ("10:24:32", "", "[youtube] ZTVDProDemo: Downloading webpage"),
+        ("10:24:33", "", "[youtube] ZTVDProDemo: Downloading player 0123abcd"),
+        ("10:24:33", "", "[youtube] ZTVDProDemo: Downloading initial data API JSON"),
+        ("10:24:34", "", "[info] ZTVDProDemo: Downloading 1 format(s): 313+251"),
+        ("10:24:34", "", "[info] Available subtitles: fr, en"),
+        ("10:24:35", "✔ ", i18n.tr("step_analyze_done", title=DEMO_INFO["title"])),
+    ]
+    for stamp, prefix, text in fixed_lines:
+        window.log_view.appendPlainText(f"[{stamp}] {prefix}{text}")
     # La détection réelle renverrait un chemin local : on affiche volontairement
     # le message neutre « trouvé dans le PATH ».
     window.ffmpeg_status.setText(i18n.tr("ffmpeg_ok_system"))
@@ -100,7 +104,7 @@ def main() -> int:
 
         image = window.grab().toImage()
         target = OUTPUT / name
-        if not image.save(str(target), "PNG"):
+        if not image.save(str(target)):
             print(f"Échec de l'écriture : {target}")
             return 1
         print(f"Capture générée : {target} ({image.width()}x{image.height()})")
