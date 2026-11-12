@@ -1,4 +1,4 @@
-PySide6>=6.12
-yt-dlp>=2026.10.26
+PySide6==6.12.0
+yt-dlp==2026.10.26
 # Solveur EJS officiel embarqué : évite un téléchargement GitHub au premier usage.
-yt-dlp-ejs>=0.8.0
+yt-dlp-ejs==0.8.0

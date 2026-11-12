@@ -32,6 +32,7 @@ from .config import FORMATS, QUALITIES, check_ffmpeg, default_output_dir
 from .downloader import AnalyzeWorker, DownloadWorker, is_valid_url
 from .i18n import LANGUAGES, tr
 from .logger import logger
+from .resources import app_icon
 from .system import reveal_in_file_manager
 from .themes import build_qss
 from .updater import InstallWorker, UpdateWorker, installed_version, is_frozen, is_newer
@@ -71,6 +72,7 @@ class MainWindow(QMainWindow):
 
     def __init__(self, settings: QSettings):
         super().__init__()
+        self.setWindowIcon(app_icon())
         self.settings = settings
         self.worker = None
         self.update_worker: UpdateWorker | None = None

@@ -3,13 +3,17 @@ build/
 dist/
 __pycache__/
 *.pyc
+*.pyo
 src/ffmpeg/
 src/deno/
 
-# Tests & Coverage
+# Tests & coverage
 .pytest_cache/
 .coverage
+coverage.xml
 htmlcov/
+.mypy_cache/
+.ruff_cache/
 
 # Logs
 *.log
@@ -17,8 +21,22 @@ logs/
 
 # IDE & OS
 .vscode/
+.idea/
 .DS_Store
 Thumbs.db
+desktop.ini
 
-ZTVDPro.spec
-build.ps1
+# Secrets & configuration locale
+.env
+.env.*
+*.key
+*.pem
+*.p12
+*.pfx
+
+# Fichiers temporaires / téléchargements partiels
+*.part
+*.tmp
+*.bak
+*.orig
+*.rej

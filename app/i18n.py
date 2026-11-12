@@ -179,7 +179,7 @@ TRANSLATIONS: dict[str, dict[str, str]] = {
         "q_best": "أفضل جودة متاحة",
         "dlg_select_output": "اختر مجلد الحفظ", "dlg_select_ffmpeg": "اختر مجلد ffmpeg",
         "err_title": "خطأ", "err_url": "يرجى إدخال رابط صالح (http/https).",
-        "err_domain":"هذا النطاق غير مدعوم في هذا التطبيق!",
+        "err_domain": "هذا النطاق غير مدعوم في هذا التطبيق!",
         "err_ffmpeg": "لم يتم العثور على ffmpeg. اختر مجلده أو قم بتثبيته.",
         "err_ytdlp_missing": "yt-dlp غير مثبّت. نفّذ: pip install yt-dlp",
         "step_start": "بدء التحميل: {url}",

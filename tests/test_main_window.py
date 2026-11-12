@@ -204,4 +204,3 @@ def test_stop_thread_does_not_orphan_finished_thread(qapp: QApplication) -> None
     assert not thread.terminated
     assert thread not in MainWindow._ORPHAN_THREADS
     assert not thread.deleted  # détruit par _on_thread_finished, pas ici
-

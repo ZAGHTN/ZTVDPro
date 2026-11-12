@@ -1,11 +1,44 @@
 # ZTVD Pro
 
+[![CI](https://github.com/ZAGHTN/ZTVDPro/actions/workflows/ci.yml/badge.svg)](https://github.com/ZAGHTN/ZTVDPro/actions/workflows/ci.yml)
+[![License: GPL-3.0](https://img.shields.io/badge/license-GPL--3.0-blue.svg)](LICENSE)
+[![Python](https://img.shields.io/badge/python-3.11%2B-blue.svg)](pyproject.toml)
+[![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20macOS%20%7C%20Linux-lightgrey.svg)](#version-compil%C3%A9e-utilisateur-final)
+
 Application de bureau **multiplateforme** (Windows, macOS, Linux) pour télécharger des vidéos
 depuis les sites les plus populaires, avec la meilleure qualité image et son possible.
 
 - Moteur : [yt-dlp](https://github.com/yt-dlp/yt-dlp) + [ffmpeg](https://ffmpeg.org)
 - Interface : **PySide6** (Qt 6), thèmes **clair / sombre**
 - Langues : **English, Français, العربية** (avec bascule automatique en mode droite-à-gauche)
+- Licence : **GPL-3.0-only**
+
+![Interface de ZTVD Pro (thème clair)](docs/screenshots/main.png)
+
+<details>
+<summary>Thème sombre</summary>
+
+![Interface de ZTVD Pro (thème sombre)](docs/screenshots/main-dark.png)
+
+</details>
+
+## Télécharger
+
+Les versions compilées sont publiées dans les
+[**Releases GitHub**](https://github.com/ZAGHTN/ZTVDPro/releases). L'archive Windows
+contient le dossier complet `ZTVDPro\` (application, ffmpeg, solveur EJS et Deno) :
+
+1. téléchargez `ZTVDPro-<version>-win64.zip` ;
+2. extrayez l'archive ;
+3. lancez `ZTVDPro.exe` depuis le dossier extrait.
+
+Ne déplacez pas l'exécutable seul : ffmpeg et les autres composants doivent rester à côté.
+Le SHA-256 de l'archive est publié dans les notes de release. La taille du zip est
+d'environ 650 Mo (ffmpeg + ffprobe ≈ 420 Mo, Deno ≈ 90 Mo).
+
+> Les binaires lourds ne sont pas versionnés dans le dépôt Git : ils sont joints aux
+> releases (limite de 2 Go par asset) et non poussés dans l'historique Git
+> (limite de 100 Mo par fichier).
 
 ## Fonctionnalités
 
@@ -29,6 +62,7 @@ depuis les sites les plus populaires, avec la meilleure qualité image et son po
   arrêt coopératif des threads (jamais de `terminate()`)
 - Menus : langue, thème, mise à jour de yt-dlp, vérification automatique au démarrage, à propos
 - Réglages mémorisés entre les sessions (`QSettings`), validés et bornés à la lecture
+- Icône multi-résolutions, ressources embarquées et journalisation rotative dans le dossier utilisateur
 
 ### Sites reconnus par la validation
 
@@ -39,13 +73,20 @@ dans `app/downloader.py` pour être acceptés par l'interface.
 
 ## Installation
 
-Prérequis : **Python 3.11+** et **ffmpeg** (avec ffprobe).
+Prérequis : **Python 3.11+**, **ffmpeg** (avec ffprobe) et, pour les formats YouTube récents,
+**Deno 2.9.8+** (recommandé) ou Node.js.
 
 ```bash
 python -m venv .venv
 source .venv/bin/activate        # Windows : .venv\Scripts\activate
 pip install -r requirements.txt
 python main.py
+```
+
+Pour développer et lancer les tests :
+
+```bash
+pip install -r requirements-dev.txt
 ```
 
 ### Installer ffmpeg
@@ -67,7 +108,7 @@ L'option `ejs:github` est déjà intégrée au code : l'utilisateur ne doit jama
 | Situation | Action de l'utilisateur |
 |---|---|
 | Build officiel (solveur + Deno embarqués) | **Rien à faire** |
-| Build avec `-NoDeno`, ou Deno absent au moment du build | Installer **Deno** (recommandé) ou **Node.js**, puis redémarrer l'application |
+| Build avec `-NoDeno`, ou Deno absent au moment du build | Installer **Deno 2.9.8+** (recommandé) ou **Node.js**, puis redémarrer l'application |
 | GitHub bloqué par un proxy / pare-feu | Rien si le solveur est embarqué ; sinon autoriser `github.com` |
 | Machine hors ligne | Les téléchargements restent possibles ; sans solveur embarqué, certains formats récents peuvent manquer |
 
@@ -75,7 +116,7 @@ L'option `ejs:github` est déjà intégrée au code : l'utilisateur ne doit jama
 
 ```powershell
 winget install DenoLand.Deno
-deno --version
+deno --version   # 2.9.8 ou plus récent recommandé
 # ou
 winget install OpenJS.NodeJS.LTS
 node --version
@@ -156,35 +197,54 @@ revenir à la version embarquée, par exemple après une régression.
 - WEBM n'accepte que VP9/AV1 + Opus/Vorbis : si le site ne propose rien de compatible, la fusion
   échoue et l'application retente automatiquement en MKV, qui accepte quasiment tous les codecs.
 - **Solveur JavaScript YouTube** : le solveur officiel EJS (`yt-dlp-ejs`) est utilisé en priorité,
-  et `ejs:github` reste autorisé en repli. Un interpréteur JavaScript (**Deno** recommandé, ou
-  Node.js) doit être disponible, sauf dans un build qui embarque Deno ; sans runtime, certains
+  et `ejs:github` reste autorisé en repli. Un interpréteur JavaScript (**Deno 2.9.8+** recommandé,
+  ou Node.js) doit être disponible, sauf dans un build qui embarque Deno ; sans runtime, certains
   formats récents peuvent manquer.
 - Certains sites (YouTube notamment) peuvent exiger un interpréteur JavaScript externe
   (par ex. Deno) pour yt-dlp : voir le wiki de yt-dlp en cas d'erreur de formats.
 
+## Documentation
+
+| Document | Contenu |
+|---|---|
+| [`docs/BUILD.md`](docs/BUILD.md) | Versions de référence, empreintes ffmpeg, build reproductible et release |
+| [`CHANGELOG.md`](CHANGELOG.md) | Historique des versions |
+| [`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md) | Licences des composants tiers |
+| [`CONTRIBUTING.md`](CONTRIBUTING.md) | Environnement de développement et règles de contribution |
+| [`SECURITY.md`](SECURITY.md) | Signalement des vulnérabilités |
+| [`CODE_OF_CONDUCT.md`](CODE_OF_CONDUCT.md) | Code de conduite |
+
 ## Structure du projet
 
-```
+```text
 main.py                 point d'entrée
 ZTVDPro.spec            configuration PyInstaller
 build.ps1               script de compilation Windows
+pyproject.toml          métadonnées, dépendances épinglées, configuration pytest
 requirements.txt        dépendances d'exécution (dont le solveur yt-dlp-ejs)
-requirements-dev.txt    dépendances de développement (pytest, PyInstaller)
+requirements-dev.txt    dépendances de développement (pytest, PyInstaller, flake8)
 app/
   config.py             qualités, formats, détection ffmpeg
   i18n.py               traductions EN / FR / AR
   themes.py             thèmes clair / sombre
   downloader.py         QThread autour de yt-dlp, validation d'URL et exceptions
   logger.py             journalisation rotative dans le dossier utilisateur
+  resources.py          accès aux ressources embarquées (icône)
   updater.py            vérification PyPI, mise à jour pip ou wheels utilisateur
   ytdlp_runtime.py      surcharge yt-dlp dans %LOCALAPPDATA% (version compilée)
   widgets.py            section repliable
   system.py             ouverture du dossier dans le gestionnaire de fichiers
   main_window.py        interface principale
-src/
-  ffmpeg/                
-    bin                 dossier qui contient ffmpeg.exe, ffprobe.exe
+assets/                 icône PNG / ICO
+docs/
+  BUILD.md              guide de build et de release
+  screenshots/          captures d'écran du README
+licenses/               textes des licences tierces
 tests/                  tests unitaires (config, i18n, downloader, logger, updater, interface)
+tools/                  génération reproductible de l'icône et des captures
+src/
+  ffmpeg/
+    bin/                ffmpeg.exe et ffprobe.exe (non versionnés)
 ```
 
 Les journaux sont écrits dans `%LOCALAPPDATA%\ZTVDPro\logs\ztvd_pro.log` (Windows),
@@ -195,24 +255,37 @@ automatique. Aucun fichier de log n'est créé dans le répertoire courant.
 
 ```bash
 pip install -r requirements-dev.txt
-.venv/Scripts/python.exe tests/run_tests.py
-# ou, équivalent :
 .venv/Scripts/python.exe -m pytest
+# ou
+.venv/Scripts/python.exe tests/run_tests.py
 ```
 
 Sur macOS/Linux, remplacez `.venv/Scripts/python.exe` par `.venv/bin/python`.
 
+Vérifications exécutées par la CI (Ubuntu et Windows, Python 3.11 et 3.13) :
+
+```bash
+python -m flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+python -m flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
+QT_QPA_PLATFORM=offscreen python -m pytest -q
+```
+
+La suite compte **82 tests**. Les tests Qt utilisent `QT_QPA_PLATFORM=offscreen`
+(voir `tests/conftest.py`).
+
 ## Créer un exécutable (Windows)
 
 La configuration PyInstaller fournie (`ZTVDPro.spec`) produit un dossier autonome
-`dist\ZTVDPro\` contenant `ZTVDPro.exe`, ffmpeg/ffprobe, le solveur EJS et, si
+`dist\ZTVDPro\` contenant `ZTVDPro.exe`, ffmpeg/ffprobe, le solveur EJS, l'icône et, si
 disponible, Deno. `ffplay.exe` n'est pas embarqué (inutile et ~220 Mo).
 
 Prérequis :
 
+- Python **3.11+** ;
 - `src\ffmpeg\bin\ffmpeg.exe` et `src\ffmpeg\bin\ffprobe.exe` ;
 - PyInstaller : `pip install -r requirements-dev.txt` ;
-- Deno dans le `PATH`, **ou** déposé dans `src\deno\deno.exe`, pour l'embarquer (facultatif).
+- Deno dans le `PATH`, **ou** déposé dans `src\deno\deno.exe` / `src\deno\bin\deno.exe`,
+  pour l'embarquer (facultatif, **2.9.8+** recommandé).
 
 ```powershell
 .\build.ps1
@@ -244,6 +317,33 @@ Le dossier pèse environ 660 Mo (ffmpeg + ffprobe ≈ 420 Mo, Deno ≈ 90 Mo).
 
 Sur macOS/Linux, le `.spec` peut servir de base avec `pyinstaller ZTVDPro.spec`, après
 avoir adapté les noms d'exécutables ffmpeg (`ffmpeg` / `ffprobe` sans `.exe`).
+
+Le guide détaillé (versions de référence, SHA-256, archive de release, signature) est dans
+[`docs/BUILD.md`](docs/BUILD.md).
+
+## Contribuer
+
+Les contributions (correctifs, traductions, documentation, tests) sont bienvenues.
+Lisez [`CONTRIBUTING.md`](CONTRIBUTING.md) et le [`CODE_OF_CONDUCT.md`](CODE_OF_CONDUCT.md)
+avant d'ouvrir une issue ou une pull request.
+
+- Bugs : [modèle d'issue](https://github.com/ZAGHTN/ZTVDPro/issues/new?template=bug_report.yml)
+- Fonctionnalités : [modèle d'issue](https://github.com/ZAGHTN/ZTVDPro/issues/new?template=feature_request.yml)
+- Vulnérabilités : **ne pas** ouvrir d'issue publique, voir [`SECURITY.md`](SECURITY.md)
+- Questions : [Discussions](https://github.com/ZAGHTN/ZTVDPro/discussions)
+
+## Licence
+
+ZTVD Pro est distribué sous **GNU General Public License v3.0 only**
+(`GPL-3.0-only`). Le texte intégral est dans [`LICENSE`](LICENSE).
+
+Cette licence est notamment requise par le build **GPLv3** de ffmpeg embarqué
+(`--enable-gpl --enable-version3`). Les composants tiers conservent leurs licences
+respectives ; voir [`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md) et le dossier
+[`licenses/`](licenses/).
+
+En contribuant, vous acceptez que votre contribution soit distribuée sous cette
+même licence.
 
 ## Avertissement légal
 

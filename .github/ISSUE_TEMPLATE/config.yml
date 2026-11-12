@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Question ou aide à l'utilisation
+    url: https://github.com/ZAGHTN/ZTVDPro/discussions
+    about: Posez une question et échangez avec la communauté.
+  - name: Signaler une vulnérabilité
+    url: https://github.com/ZAGHTN/ZTVDPro/security/advisories/new
+    about: Ne publiez pas de vulnérabilité dans une issue publique.

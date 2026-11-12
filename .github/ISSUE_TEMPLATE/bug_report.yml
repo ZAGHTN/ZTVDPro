@@ -1,0 +1,87 @@
+name: Signaler un bug
+description: Décrire un comportement inattendu de ZTVD Pro.
+title: "[Bug]: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Merci de vérifier qu'une issue similaire n'existe pas déjà.
+        Pour une vulnérabilité, utilisez **Security → Report a vulnerability**.
+
+  - type: input
+    id: version
+    attributes:
+      label: Version de ZTVD Pro
+      description: Visible dans Aide → À propos (ou version du dépôt).
+      placeholder: "1.0.0"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: os
+    attributes:
+      label: Système d'exploitation
+      options:
+        - Windows 11
+        - Windows 10
+        - macOS
+        - Linux
+        - Autre
+    validations:
+      required: true
+
+  - type: input
+    id: source
+    attributes:
+      label: Version source ou compilée ?
+      placeholder: "python main.py / dist\\ZTVDPro\\ZTVDPro.exe"
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Étapes de reproduction
+      description: Décrivez précisément les actions qui déclenchent le problème.
+      placeholder: |
+        1. Ouvrir l'application
+        2. Coller l'URL ...
+        3. Cliquer sur ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Comportement attendu
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: Comportement observé
+    validations:
+      required: true
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Journaux / message d'erreur
+      description: |
+        Windows : %LOCALAPPDATA%\ZTVDPro\logs\ztvd_pro.log
+        macOS : ~/Library/Logs/ZTVDPro/
+        Linux : ~/.local/state/ztvdpro/logs/
+        Supprimez les données personnelles avant de coller.
+      render: text
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Vérifications
+      options:
+        - label: J'ai vérifié que le problème n'est pas déjà signalé.
+          required: true
+        - label: J'ai retiré les informations personnelles des journaux.
+          required: true

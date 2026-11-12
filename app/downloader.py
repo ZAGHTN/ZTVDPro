@@ -194,7 +194,7 @@ def build_options(out_dir: str, height: int, container: str, ffmpeg_location: st
         ]
         return opts
 
-    # Format robuste avec repli (fallback) universel pour les sites ne proposant pas de flux séparés (ex: Pexels, Pixabay, Dailymotion)
+    # Format robuste avec repli pour les sites sans flux séparés (Pexels, Pixabay, Dailymotion)
     if height:
         opts["format"] = f"bv*[height<={height}]+ba/b[height<={height}]/best[height<={height}]/bv*+ba/b/best"
     else:

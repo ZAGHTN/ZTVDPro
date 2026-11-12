@@ -1,0 +1,55 @@
+name: Proposer une fonctionnalité
+description: Suggérer une amélioration ou un nouveau comportement.
+title: "[Feature]: "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Décrivez le besoin avant la solution technique. Les propositions doivent
+        rester compatibles avec les conditions d'utilisation des sites concernés.
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problème ou besoin
+      description: Quel problème cette fonctionnalité résout-elle ?
+    validations:
+      required: true
+
+  - type: textarea
+    id: solution
+    attributes:
+      label: Solution proposée
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives envisagées
+    validations:
+      required: false
+
+  - type: dropdown
+    id: area
+    attributes:
+      label: Domaine concerné
+      options:
+        - Interface / ergonomie
+        - Téléchargement / yt-dlp
+        - ffmpeg / formats
+        - Traductions
+        - Build / distribution
+        - Documentation
+        - Autre
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Vérifications
+      options:
+        - label: J'ai vérifié que la fonctionnalité n'est pas déjà proposée.
+          required: true

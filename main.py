@@ -5,6 +5,7 @@ from PySide6.QtCore import QLocale, QSettings, Qt
 from PySide6.QtWidgets import QApplication, QMessageBox
 
 from app import APP_NAME, i18n
+from app.resources import app_icon
 from app.themes import build_qss
 
 
@@ -18,6 +19,7 @@ def main() -> int:
     app = QApplication(sys.argv)
     app.setApplicationName(APP_NAME)
     app.setOrganizationName("ZT Videos Downloader")
+    app.setWindowIcon(app_icon())
     app.setStyle("Fusion")
 
     settings = QSettings()

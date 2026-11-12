@@ -30,6 +30,7 @@ FORMATS: list[tuple[str, str]] = [
     ("MP3 (audio)", "mp3"),
 ]
 
+
 def _exe(name: str) -> str:
     return name + (".exe" if os.name == "nt" else "")
 

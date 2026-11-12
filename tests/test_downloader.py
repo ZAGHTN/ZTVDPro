@@ -323,4 +323,3 @@ def test_download_worker_does_not_fallback_when_cancelled(monkeypatch) -> None:
 
     assert calls == ["webm"]
     assert cancelled == [True]
-

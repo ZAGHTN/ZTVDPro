@@ -1,0 +1,54 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ztvdpro"
+version = "1.0.0"
+description = "Téléchargeur vidéo de bureau basé sur yt-dlp, ffmpeg et PySide6."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "GPL-3.0-only" }
+authors = [{ name = "ZAGHTN" }]
+keywords = ["video", "download", "yt-dlp", "ffmpeg", "pyside6", "qt"]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Environment :: X11 Applications :: Qt",
+    "Intended Audience :: End Users/Desktop",
+    "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
+    "Operating System :: Microsoft :: Windows",
+    "Operating System :: MacOS",
+    "Operating System :: POSIX :: Linux",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Multimedia :: Video",
+]
+dependencies = [
+    "PySide6==6.12.0",
+    "yt-dlp==2026.10.26",
+    "yt-dlp-ejs==0.8.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest==9.2.0",
+    "pyinstaller==6.22.3",
+    "flake8==7.5.0",
+]
+
+[project.scripts]
+ztvdpro = "main:main"
+
+[project.urls]
+Homepage = "https://github.com/ZAGHTN/ZTVDPro"
+Issues = "https://github.com/ZAGHTN/ZTVDPro/issues"
+Releases = "https://github.com/ZAGHTN/ZTVDPro/releases"
+
+[tool.setuptools]
+py-modules = ["main"]
+packages = ["app"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
